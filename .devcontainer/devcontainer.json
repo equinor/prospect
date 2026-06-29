@@ -2,12 +2,17 @@
   "name": "Python (uv)",
   "image": "mcr.microsoft.com/devcontainers/python:3.13",
 
-  "remoteEnv": {
-    "UV_LINK_MODE": "copy",
-    "UV_CACHE_DIR": "${containerWorkspaceFolder}/.uv-cache"
+  "features": {
+    "ghcr.io/astral-sh/devcontainer-features/uv:1": {
+      "version": "latest"
+    }
   },
 
-  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && source $HOME/.local/bin/env && uv sync",
+  "remoteEnv": {
+    "UV_LINK_MODE": "copy"
+  },
+
+  "postCreateCommand": "uv sync",
 
   "customizations": {
     "vscode": {
@@ -17,8 +22,8 @@
       ],
       "settings": {
         "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-        "jupyter.kernelPickSuggestions": "default",
-        "python.terminal.activateEnvironment": true
+        "python.terminal.activateEnvironment": true,
+        "jupyter.notebookControllerDefault": "ms-python.python:${workspaceFolder}/.venv/bin/python"
       }
     }
   }
